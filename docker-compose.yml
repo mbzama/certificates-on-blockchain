@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+ dcob-backend:
+  image: dcob-backend
+  build: ./backend
+  links:
+      - "mysqldb:mysqldb"
+  depends_on: 
+    - mysqldb
+  ports:
+    - "5000:5000"
+   
+  mysqldb:
+   image: mysql:5.7
+   container_name: mysql_db
+   ports:
+    - "3306:3306"
+   environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_USER=test
+    - MYSQL_PASSWORD=root
+    - MYSQL_DATABASE=ucc
+   
+ dcob-web-ui:
+  image: dcob-web-ui
+  build: ./ui
+  links:
+      - "dcob-backend:dcob-backend"
+  depends_on:
+    - dcob-backend
+  ports:
+    - "4200:4200"
