@@ -1,12 +1,14 @@
+<a href="">
+  <img class="logo2" src="https://www.ellucian.com/uploadedImages/Images/Software/degree-works.png">
+</a>
 <form *ngIf="loggedIn == false" (submit)="loginSubmit($event)" [formGroup]="form" novalidate>
-  <a href="/college">
-    <img class="logo2" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQivXTvcFKHQy1NmQqRPQij_-rhmi6SWunIEpIidiyg4uGTmORI8Q">
-  </a>
   <div class="container">
-    <div class="heading">
-      <h1>
-        Login Details
-      </h1>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="heading">
+        <h2>
+          Login Details
+        </h2>
+      </div>
     </div>
     <div class="form-group">
       <label>
@@ -112,7 +114,7 @@
             </div>
           </td>
         </tr>
- 
+
       </tbody>
     </table>
   </div>

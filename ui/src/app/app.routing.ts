@@ -4,10 +4,11 @@ import { CollegeComponent } from './college/college.component';
 import { StudentComponent } from './student/student.component';
 import { UniversityComponent } from './university/university.component';
 import { ValidateComponent } from './validate/validate.component';
+import { HomeComponent } from './home/home.component';
 
 export const appRoutes: Routes = [
 
-    { path: '', component: StudentComponent, pathMatch: "full" },
+    { path: '', component: HomeComponent, pathMatch: "full" },
     { path: 'university', component: UniversityComponent, pathMatch: "full" },
     { path: 'college', component: CollegeComponent },
     { path: 'student', component: StudentComponent },

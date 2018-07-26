@@ -2,7 +2,7 @@
     position: relative;
     left: 1.5%;
     margin-top: 0.4%;
-    width: 5%;
+    width: 6%;
   }
 
 .logo {
@@ -25,7 +25,8 @@
 }
 
 .jumbotron {
-    padding: 1%;
+    padding: 0.5%;
+    background-color: #b9aae4;
 }
 
 .bottomImage {

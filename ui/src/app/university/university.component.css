@@ -1,6 +1,6 @@
 .heading {
     text-align: center;
-    color: #003b5d;
+    color: black;
 }
 
 .container {
@@ -28,7 +28,7 @@
 
 .jumbotron {
     padding: 0.5%;
-    background-color: #cfdaef;
+    background-color: #fbd482;
 }
 
 .submitMessage {
