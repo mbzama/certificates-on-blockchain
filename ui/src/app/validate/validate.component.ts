@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { FormControl, FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-    selector: 'app-post',
-    templateUrl: './post.component.html',
-    styleUrls: ['./post.component.css']
+    selector: 'app-validate',
+    templateUrl: './validate.component.html',
+    styleUrls: ['./validate.component.css']
 })
-export class PostComponent {
-
+export class ValidateComponent {
 
     dat;
-    
     flag = false;
+
+    //Create Form Group
     form = new FormGroup({
     });
+
     constructor(private fb: FormBuilder, private httpClient: HttpClient) { }
 
     validate(event) {
