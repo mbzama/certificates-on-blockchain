@@ -14,6 +14,9 @@ export class UniversityComponent {
   submit;
   loggedIn;
   invalid;
+  studentData;
+  checkedBoxes = [];
+  uncheckedData = [];
 
   angularForm = new FormGroup({
     studentName: new FormControl(),
@@ -72,10 +75,48 @@ export class UniversityComponent {
     //   this.invalid = true;
     //   console.log(2);
     // }
+
+    //Get data of all students
+    this.httpClient.get(environment.getStudentsData)
+      .subscribe(
+        response => {
+          this.studentData = response;
+        },
+        err => {
+          console.log("Error Ocurred" + err);
+        }
+      )
   }
 
   submitToBlockchain() {
     this.submit = true;
+  }
+
+  checkboxClicked(data) {
+    this.checkedBoxes.push(data.ID);
+    this.uncheckedData.push(data);
+  }
+
+  sendDataForConfirmation() {
+
+    var obj = { "ID": this.checkedBoxes, "uf": "1" };
+    var i;
+
+    // for (i = 0; i < this.checkedBoxes.length; i++) {
+    //   obj[i] = [{ "ID": this.checkedBoxes[i], "uf": "1" }];
+    // }
+    console.log(obj);
+
+    this.httpClient.post(environment.postStudentForConfirmation, obj)
+      .subscribe(
+        response => {
+          console.log(response);
+          // this.studentData = this.uncheckedData;
+        },
+        err => {
+          console.log("Error Ocurred" + err);
+        }
+      )
   }
 
 

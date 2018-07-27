@@ -4,12 +4,8 @@
 
 export const environment = {
   production: false,
-  getDebtorAPI : 'http://192.168.2.223:3000/getDebtor',
-  getSecuredPartyAPI : 'http://192.168.2.223:3000/getsecuredparties',
-  getCollateralAPI : 'http://192.168.2.223:3000/getcollaterol',
-  getStatesAPI : 'http://192.168.2.223:3000/getstates',
-  getJurisdictionAPI : 'http://192.168.2.223:3000/getjurisdictions',
-  postNewFilling : 'http://192.168.2.223:3000/submitdoc'
+  getStudentsData: 'http://192.168.3.17:3000/students',
+  postStudentForConfirmation: 'http://192.168.3.17:3000/universityverify'
 };
 
 /*

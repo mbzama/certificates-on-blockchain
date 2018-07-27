@@ -67,38 +67,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let data of studentData">
           <td>
-            <input type="checkbox">
+            <input type="checkbox" id="sd" value="{{data.ID}}" (click)="checkboxClicked(data)">
           </td>
-          <td>Rahul Rajput</td>
-          <td>CSE</td>
-          <td>2014</td>
-          <td>B.E</td>
-          <td>School of Management Studies</td>
-        </tr>
-        <tr>
-          <td>
-            <input type="checkbox">
-          </td>
-          <td>Hari Prasad</td>
-          <td>ECE</td>
-          <td>2015</td>
-          <td>M.tech</td>
-          <td>Department of Computers</td>
-        </tr>
-        <tr>
-          <td>
-            <input type="checkbox">
-          </td>
-          <td>Badiyuzama Mohammad</td>
-          <td>CSE</td>
-          <td>2010</td>
-          <td>BCA</td>
-          <td>Department of Information Science</td>
+          <td>{{data.sname}}</td>
+          <td>{{data.Sbranch}}</td>
+          <td>{{data.year}}</td>
+          <td>{{data.Degree}}</td>
+          <td>{{data.Email}}</td>
         </tr>
         <br>
-        <button>Send for Confirmation</button>
+        <button (click)="sendDataForConfirmation()">Send for Confirmation</button>
         <br>
         <br>
       </tbody>
