@@ -27,7 +27,9 @@ Before we talk about architecture of our POC, lets get some definitions out of t
 
 
 
-## General Architecture
+## Architecture
+
+### Information Ingestion / Point of Entry
 
 ![Architecture](https://raw.githubusercontent.com/mbzama/certificates-on-blockchain/master/ui/sreenshots/architecture.png)
 
