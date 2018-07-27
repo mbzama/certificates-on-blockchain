@@ -34,8 +34,14 @@ Before we talk about architecture of our POC, lets get some definitions out of t
 
 
 
+## Verification Process
 
-## Docker
+![Verification](https://raw.githubusercontent.com/mbzama/certificates-on-blockchain/master/ui/sreenshots/verification.png)
+
+
+
+
+## Setup using Docker
 
 
 To run the application using docker. Follow the instructions below to create a local Docker container:
@@ -59,7 +65,7 @@ To run the application using docker. Follow the instructions below to create a l
    
 
    
-## Running using npm
+## Setup using npm
 
 
    1. Get the code:
@@ -89,14 +95,20 @@ To run the application using docker. Follow the instructions below to create a l
 
 
 
- ### 1. For student login
+### 1. Home Screen
+
+   ![Home](https://raw.githubusercontent.com/mbzama/certificates-on-blockchain/master/ui/sreenshots/home.png)
+
+
+
+ ### 2. For student login
 
    ![Student Login](https://raw.githubusercontent.com/mbzama/certificates-on-blockchain/master/ui/sreenshots/student.png)
 
 
 
 
- ### 2.For verification by student
+ ### 3.For verification by student
 
 
    Below student data is confirmed by college and based on it student can verify information before submitting.
@@ -132,6 +144,13 @@ This application has 3 coding environments.
 
                     /blockchain/app
    
+   
+ 
+ ## Validation of Certificate (Screenshot)
+ 
+ 
+   ![validation](https://raw.githubusercontent.com/mbzama/certificates-on-blockchain/master/ui/sreenshots/validateCertificate.png)
+ 
    
    
  ## Sample output from blockchain
