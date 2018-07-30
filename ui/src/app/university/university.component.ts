@@ -108,11 +108,7 @@ export class UniversityComponent {
   sendDataForConfirmation() {
 
     var obj = [];
-    var test = this.uncheckedData;
     var i;
-
-    console.log(this.checkedBoxes);
-    console.log(this.checkedBoxes.length);
 
     for (i = 0; i < this.checkedBoxes.length; i++) {
       obj[i] = { "ID": this.checkedBoxes[i] };

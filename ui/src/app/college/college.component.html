@@ -64,57 +64,31 @@
           <th>Branch</th>
           <th>Year</th>
           <th>Degree</th>
+          <th>Email</th>
         </tr>
       </thead>
       <br>
       <tbody>
-        <tr>
-          <td>
-            <input type="checkbox">
-          </td>
-          <td>Rahul Rajput</td>
-          <td>CSE</td>
-          <td>2014</td>
-          <td>B.E</td>
-        </tr>
+        <ng-container *ngFor="let data of studentData">
+          <tr *ngIf="data.CF == 0">
+            <td>
+              <input type="checkbox" id="sd" value="{{data.ID}}" (click)="checkboxClicked(data)">
+            </td>
+            <td>{{data.sname}}</td>
+            <td>{{data.Sbranch}}</td>
+            <td>{{data.year}}</td>
+            <td>{{data.Degree}}</td>
+            <td>{{data.Email}}</td>
+          </tr>
+        </ng-container>
         <br>
-        <tr>
-          <td>
-            <input type="checkbox">
-          </td>
-          <td>Hari Prasad</td>
-          <td>ECE</td>
-          <td>2015</td>
-          <td>BCA</td>
-        </tr>
-        <br>
-        <tr>
-          <td>
-            <input type="checkbox">
-          </td>
-          <td>Badiyuzama Mohammad</td>
-          <td>CSE</td>
-          <td>2010</td>
-          <td>MSc</td>
-        </tr>
-        <br>
-        <tr>
-          <td>
-            <input type="checkbox">
-          </td>
-          <td>Rohit Chauhan</td>
-          <td>IT</td>
-          <td>2017</td>
-          <td>B.E</td>
-        </tr>
         <tr>
           <td colspan=2>
             <div class="tableButton">
-              <button class="btn btn-success">Approve</button>
+              <button (click)="approve()" class="btn btn-success">Approve</button>
             </div>
           </td>
         </tr>
-
       </tbody>
     </table>
   </div>

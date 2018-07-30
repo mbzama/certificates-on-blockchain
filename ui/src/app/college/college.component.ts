@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 import { FormControl, FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 
 @Component({
@@ -6,21 +8,16 @@ import { FormControl, FormGroup, FormBuilder, Validators, NgForm } from '@angula
     templateUrl: './college.component.html',
     styleUrls: ['./college.component.css']
 })
-export class CollegeComponent implements OnInit {
+export class CollegeComponent {
 
-    studentName;
-    studentBranch;
-    passingYear;
-    collegeName;
+    studentData;
+    checkedBoxes;
     approved = false;
     loggedIn;
     invalid;
+    login;
 
     collegeForm = new FormGroup({
-        studentName: new FormControl(),
-        studentBranch: new FormControl(),
-        passingYear: new FormControl(),
-        collegeName: new FormControl()
     });
 
     form = new FormGroup({
@@ -28,7 +25,7 @@ export class CollegeComponent implements OnInit {
         password: new FormControl()
     });
 
-    constructor(private fb: FormBuilder) {
+    constructor(private fb: FormBuilder, private httpClient: HttpClient) {
         this.createForm();
     }
 
@@ -41,24 +38,40 @@ export class CollegeComponent implements OnInit {
 
 
     ngOnInit() {
-        this.studentName = 'Rahul Rajput';
-        this.studentBranch = 'CSE';
-        this.passingYear = '2014';
-        this.collegeName = 'Chitkara University';
         this.loggedIn = false;
         this.invalid = false;
     }
 
+    checkboxClicked(data) {
+        console.log(data);
+        this.checkedBoxes = data.ID;
+    }
+
     approve() {
         this.approved = true;
+
+        var obj = { "ID": this.checkedBoxes, "cf": "1" };
+
+        console.log(obj);
+
+        this.httpClient.post(environment.getCollegeVerify, obj)
+            .subscribe(
+                response => {
+                    console.log(response);
+                    this.getCollegeStudentData();
+                },
+                err => {
+                    console.log("Error Ocurred" + err);
+                }
+            )
     }
 
     loginSubmit(event) {
         const target = event.target;
-        const login = target.querySelector('#login').value;
+        const CollegeID = target.querySelector('#login').value;
         const password = target.querySelector('#password').value;
         this.loggedIn = true;
-    
+
         // if (login === 'colg1' && password === '12345') {
         //   this.loggedIn = true;
         //   console.log(1);
@@ -66,5 +79,21 @@ export class CollegeComponent implements OnInit {
         //   this.invalid = true;
         //   console.log(2);
         // }
-      }
+
+        this.login = { "CID": CollegeID };
+        this.getCollegeStudentData();
+    }
+
+    getCollegeStudentData() {
+        this.httpClient.post(environment.getCollegeStudents, this.login)
+            .subscribe(
+                response => {
+                    console.log(response);
+                    this.studentData = response;
+                },
+                err => {
+                    console.log("Error Ocurred" + err);
+                }
+            )
+    }
 }

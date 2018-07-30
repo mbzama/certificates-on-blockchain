@@ -6,7 +6,9 @@ export const environment = {
   production: false,
   getUnverifiedStudentsData: 'http://192.168.3.17:3000/unverifiedstudents',
   getVerifiedStudentsData: 'http://192.168.3.17:3000/verifiedstudents',
-  postStudentForConfirmation: 'http://192.168.3.17:3000/universityverify'
+  postStudentForConfirmation: 'http://192.168.3.17:3000/universityverify',
+  getCollegeStudents: 'http://192.168.3.17:3000/collegestudents',
+  getCollegeVerify: 'http://192.168.3.17:3000/collegeverify'
 };
 
 /*
