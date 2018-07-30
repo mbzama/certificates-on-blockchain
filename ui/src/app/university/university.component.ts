@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-university',
@@ -15,6 +16,7 @@ export class UniversityComponent {
   loggedIn;
   invalid;
   studentData;
+  forVerificationData;
   checkedBoxes = [];
   uncheckedData = [];
 
@@ -32,7 +34,7 @@ export class UniversityComponent {
     password: new FormControl()
   });
 
-  constructor(private fb: FormBuilder, private httpClient: HttpClient) {
+  constructor(private fb: FormBuilder, private httpClient: HttpClient, private routes: Router) {
     this.createForm();
   }
 
@@ -76,8 +78,8 @@ export class UniversityComponent {
     //   console.log(2);
     // }
 
-    //Get data of all students
-    this.httpClient.get(environment.getStudentsData)
+    //Get data of all unverified students
+    this.httpClient.get(environment.getUnverifiedStudentsData)
       .subscribe(
         response => {
           this.studentData = response;
@@ -86,6 +88,8 @@ export class UniversityComponent {
           console.log("Error Ocurred" + err);
         }
       )
+
+    this.getVerifiedStudent();
   }
 
   submitToBlockchain() {
@@ -97,21 +101,44 @@ export class UniversityComponent {
     this.uncheckedData.push(data);
   }
 
+  checkboxClickedForConfirmation(data) {
+    console.log(data);
+  }
+
   sendDataForConfirmation() {
 
-    var obj = { "ID": this.checkedBoxes, "uf": "1" };
+    var obj = [];
+    var test = this.uncheckedData;
     var i;
 
-    // for (i = 0; i < this.checkedBoxes.length; i++) {
-    //   obj[i] = [{ "ID": this.checkedBoxes[i], "uf": "1" }];
-    // }
+    console.log(this.checkedBoxes);
+    console.log(this.checkedBoxes.length);
+
+    for (i = 0; i < this.checkedBoxes.length; i++) {
+      obj[i] = { "ID": this.checkedBoxes[i] };
+    }
     console.log(obj);
 
     this.httpClient.post(environment.postStudentForConfirmation, obj)
       .subscribe(
         response => {
           console.log(response);
-          // this.studentData = this.uncheckedData;
+
+          this.studentData = response;
+          this.getVerifiedStudent();
+
+        },
+        err => {
+          console.log("Error Ocurred" + err);
+        }
+      )
+  }
+
+  getVerifiedStudent() {
+    return this.httpClient.get(environment.getVerifiedStudentsData)
+      .subscribe(
+        response => {
+          this.forVerificationData = response;
         },
         err => {
           console.log("Error Ocurred" + err);

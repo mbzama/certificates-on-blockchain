@@ -108,34 +108,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr *ngFor="let data of forVerificationData">
           <td>
-            <input type="checkbox">
+            <input type="checkbox" value="{{data.ID}}" (click)="checkboxClickedForConfirmation(data)">
           </td>
-          <td>Rohit Chauhan</td>
-          <td>Business</td>
-          <td>2012</td>
-          <td>MSc</td>
-          <td>School of Management Studies</td>
+          <td>{{data.sname}}</td>
+          <td>{{data.Sbranch}}</td>
+          <td>{{data.year}}</td>
+          <td>{{data.Degree}}</td>
+          <td>{{data.Email}}</td>
           <td>
             <input type="checkbox" value="" onclick="return false;" />
-          </td>
-          <td>
-            <input type="checkbox" value="" checked onclick="return false;" />
-          </td>
-        </tr>
-
-        <tr class="table-success">
-          <td>
-            <input type="checkbox">
-          </td>
-          <td>Anjali Minhas</td>
-          <td>IT</td>
-          <td>2010</td>
-          <td>BCA</td>
-          <td>Department of Information Science</td>
-          <td>
-            <input type="checkbox" value="" checked onclick="return false;" />
           </td>
           <td>
             <input type="checkbox" value="" checked onclick="return false;" />
