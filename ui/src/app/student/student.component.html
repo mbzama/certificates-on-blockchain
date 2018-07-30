@@ -46,6 +46,10 @@
     </button>
   </div>
 
+  <div class="container" *ngIf="alreadyConfirmed">
+    <h1>YOU HAVE ALREADY APPROVED YOUR DETAILS</h1>
+  </div>
+
   <div class="container" [hidden]="beforeSubmission">
     <div class="form-group">
       <label>
@@ -80,7 +84,7 @@
       <label>
         <b>College Name</b>
       </label>
-      <input class="form-control" type="text" id="collegeName" placeholder={{collegeName}} readonly>
+      <input class="form-control" type="text" id="collegeName" placeholder={{collegeID}} readonly>
     </div>
 
     <button (click)="refresh()" type="button" style="margin-right: 8%" class="btn btn-secondary">

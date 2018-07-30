@@ -8,7 +8,9 @@ export const environment = {
   getVerifiedStudentsData: 'http://192.168.3.17:3000/verifiedstudents',
   postStudentForConfirmation: 'http://192.168.3.17:3000/universityverify',
   getCollegeStudents: 'http://192.168.3.17:3000/collegestudents',
-  getCollegeVerify: 'http://192.168.3.17:3000/collegeverify'
+  getCollegeVerify: 'http://192.168.3.17:3000/collegeverify',
+  getStudent: 'http://192.168.3.17:3000/getStudent',
+  verifyStudent: 'http://192.168.3.17:3000/studentverify'
 };
 
 /*
