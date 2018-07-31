@@ -4,19 +4,12 @@
 
 export const environment = {
   production: false,
-  getUnverifiedStudentsData: 'http://192.168.3.17:3000/unverifiedstudents',
-  getVerifiedStudentsData: 'http://192.168.3.17:3000/verifiedstudents',
-  postStudentForConfirmation: 'http://192.168.3.17:3000/universityverify',
-  getCollegeStudents: 'http://192.168.3.17:3000/collegestudents',
-  getCollegeVerify: 'http://192.168.3.17:3000/collegeverify',
-  getStudent: 'http://192.168.3.17:3000/getStudent',
-  verifyStudent: 'http://192.168.3.17:3000/studentverify'
+  getUnverifiedStudentsData: 'http://localhost:4200:3000/unverifiedstudents',
+  getVerifiedStudentsData: 'http://localhost:4200:3000/verifiedstudents',
+  postStudentForConfirmation: 'http://localhost:4200:3000/universityverify',
+  getCollegeStudents: 'http://localhost:4200:3000/collegestudents',
+  getCollegeVerify: 'http://localhost:4200:3000/collegeverify',
+  getStudent: 'http://localhost:4200:3000/getStudent',
+  verifyStudent: 'http://localhost:4200:3000/studentverify',
+  validate: 'http://localhost:4200:3000/validate'
 };
-
-/*
- * In development mode, to ignore zone related error stack frames such as
- * `zone.run`, `zoneDelegate.invokeTask` for easier debugging, you can
- * import the following file, but please comment it out in production mode
- * because it will have performance impact when throw error
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.

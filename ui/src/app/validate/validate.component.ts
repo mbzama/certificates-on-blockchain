@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ElementRef, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { environment } from '../../environments/environment';
+
+import "rxjs/add/operator/do";
+import "rxjs/add/operator/map";
 
 @Component({
     selector: 'app-validate',
@@ -9,37 +13,47 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 })
 export class ValidateComponent {
 
-    dat;
+    doc;
     flag = false;
 
     //Create Form Group
     form = new FormGroup({
     });
 
-    constructor(private fb: FormBuilder, private httpClient: HttpClient) { }
+    constructor(private fb: FormBuilder, private httpClient: HttpClient, private el: ElementRef) { }
 
     validate(event) {
         const target = event.target;
         const validate = target.querySelector('#validate').value;
 
-        const obj = { "id" : validate};
-        console.log(obj);
+        //locate the file element meant for the file upload.
+        const inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#fileToUpload');
+        const fileCount: number = inputEl.files.length;
+        const formData = new FormData();
 
-        this.httpClient.post('http://localhost:3000/find', obj, {
-            responseType: 'text',
-        })
-            .subscribe(
-                response => {
-                   // console.log(response);
-                   this.flag=true;
-                    this.dat = response;
-                    console.log(this.dat);
-                    console.log(this.dat.blockNumber);
+        //check if the filecount is greater than zero, to be sure a file was selected.
+        if (fileCount > 0) {
 
-                },
-                err => {
-                    console.log("Error Ocurred" + err);
-                }
-            )
+            formData.append('transaction_id', validate);
+            formData.append('file-to-upload', inputEl.files.item(0));
+
+            console.log(formData);
+
+            this.httpClient.post(environment.validate, formData)
+                .subscribe(
+                    (response) => {
+                        console.log(response);
+                        if (response[0].status === '1') {
+                            this.doc = 'Your Document is Valid :)'
+                        } else {
+                            this.doc = 'Your Document is not Valid :('
+                        }
+                        this.flag = true;
+                    },
+                    err => {
+                        console.log("Error Ocurred" + err);
+                    }
+                )
+        }
     }
 }

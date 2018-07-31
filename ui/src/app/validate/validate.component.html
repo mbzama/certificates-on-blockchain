@@ -19,16 +19,15 @@
             <br>
         </label>
         <br>
-        <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+        <input type="file" class="form-control-file" id="fileToUpload">
         <button type="submit" class="btn btn-success">
-            Get Block
+            Validate
         </button>
     </div>
 </form>
 <br>
 <div class="container">
     <div *ngIf="flag" class="card">
-        <div class="card-header"> Block Details </div>
-        <div class="card-body">{{dat}}</div>
+        <div class="card-body">{{doc}}</div>
     </div>
 </div>
