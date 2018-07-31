@@ -117,20 +117,23 @@ router.post('/createcertificate', async(req, res) => {
 //college Flag update
 router.post('/collegeverify', async(req, res, next) => {
 
+ 
+
   await db.query('update certificates.Docs set cf="'+req.body.cf+'" where ID="'+req.body.ID+'";', function(err, result) {
     if (err) throw err;
     else
     console.log(result);
   });
 
+   
 
   await db.query('SELECT cf,sf from certificates.Docs where ID="'+req.body.ID+'";', function(err, result) {
     if (err) throw err;
     else
-    //console.log(result[0].sf);
-    if(result[0].sf == 1 && result[0].cf == 1){
 
-  
+    if(result[0].SF == 1 && result[0].CF == 1){
+
+   
 
    fs.readFile(__dirname + './../certificatedocs/'+req.body.email +'document.pdf', async(err, buf) => {
       
@@ -198,12 +201,13 @@ router.post('/collegeverify', async(req, res, next) => {
 
   });
 
+}
     
-    }
     else{
-      res.send("Student need to approve certificate");
+      res.send({"msg":"Student need to approve certificate"});
     }
     
+  
   });
 
 
@@ -356,11 +360,52 @@ router.post('/validate',upload.single('file-to-upload'), async(req, res, next) =
 
 
 
-router.get('/students',async(req, res, next) => {
+router.get('/verifiedstudents',async(req, res, next) => {
 
   
 
-  await db.query('SELECT * FROM certificates.Docs;', function(err, result) {
+  await db.query('SELECT * FROM certificates.Docs where UF="1";', function(err, result) {
+    if (err) throw err;
+    else{
+      res.send(result);
+    }
+  });
+
+});
+
+router.get('/unverifiedstudents',async(req, res, next) => {
+
+  
+
+  await db.query('SELECT * FROM certificates.Docs where UF="0";', function(err, result) {
+    if (err) throw err;
+    else{
+      res.send(result);
+    }
+  });
+
+});
+
+
+router.post('/collegestudents',async(req, res, next) => {
+
+  
+
+  await db.query('SELECT * FROM certificates.Docs where CollegeID = "'+req.body.CID+'";', function(err, result) {
+    if (err) throw err;
+    else{
+      res.send(result);
+    }
+  });
+
+});
+
+
+router.post('/getstudent',async(req, res, next) => {
+
+  
+
+  await db.query('SELECT * FROM certificates.Docs where email="'+req.body.email+'";', function(err, result) {
     if (err) throw err;
     else{
       res.send(result);
@@ -371,14 +416,36 @@ router.get('/students',async(req, res, next) => {
 
 
 
+
 router.post('/universityverify', async(req, res, next) => {
 
-  await db.query('update certificates.Docs set uf="'+req.body.uf+'"where ID="'+req.body.ID+'";', function(err, result) {
+  var obj = req.body;
+
+  var n = obj.length;
+
+  var i;
+
+  for(i = 0;i<n;i++){
+
+    await db.query("update certificates.Docs set uf='"+1+"' where ID ='"+obj[i].ID+"';", function(err, result) {
+      if (err) throw err;
+      else
+      console.log(result);
+         });
+
+
+  }
+
+
+
+
+  await db.query('SELECT * FROM certificates.Docs where UF="0";', function(err, result) {
     if (err) throw err;
-    else
-    console.log(result);
-    res.send(result);
+    else{
+      res.send(result);
+    }
   });
+  // res.send({"msg":"Verified successfully"});
 
 
 });
