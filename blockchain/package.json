@@ -8,7 +8,6 @@
   },
   "author": "",
   "license": "ISC",
-  "homepage": "",
   "dependencies": {
     "ethereumjs-testrpc": "^6.0.3",
     "ipfs-api": "^22.0.2",
