@@ -175,7 +175,16 @@ This application has 3 coding environments.
     value: 0
   }
    
-   
+ ### Dockers
+ 
+ To run the application, use the following command,
+ 
+ `
+ docker-compose up 
+        (or)
+ docker-compose up -d ( to run as a daemon)
+ `
+ 
    
  ## Feedback
  
@@ -183,4 +192,5 @@ This application has 3 coding environments.
  We are very interested in your feedbacks. This is a POC and a demo build and we will continue to improve it. If you have any  ideas on how to improve this POC, please reach to us!
  
  Use the https://github.com/mbzama/certificates-on-blockchain/issues section to communicate any improvements/bugs and pain points!
+ 
  
