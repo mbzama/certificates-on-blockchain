@@ -12,8 +12,7 @@ import { StudentComponent } from './student/student.component';
 import { UniversityComponent } from './university/university.component';
 import { ValidateComponent } from './validate/validate.component';
 import { HomeComponent } from './home/home.component';
-
-
+import { AddStudent } from './addStudent/addStudent.component';
 
 
 
@@ -24,7 +23,8 @@ import { HomeComponent } from './home/home.component';
     StudentComponent,
     UniversityComponent,
     ValidateComponent,
-    HomeComponent
+    HomeComponent,
+    AddStudent
   ],
   imports: [
     BrowserModule,

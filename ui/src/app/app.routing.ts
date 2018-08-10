@@ -5,6 +5,7 @@ import { StudentComponent } from './student/student.component';
 import { UniversityComponent } from './university/university.component';
 import { ValidateComponent } from './validate/validate.component';
 import { HomeComponent } from './home/home.component';
+import { AddStudent } from './addStudent/addStudent.component';
 
 export const appRoutes: Routes = [
 
@@ -12,7 +13,8 @@ export const appRoutes: Routes = [
     { path: 'university', component: UniversityComponent, pathMatch: "full" },
     { path: 'college', component: CollegeComponent },
     { path: 'student', component: StudentComponent },
-    { path: 'validate', component: ValidateComponent }
+    { path: 'validate', component: ValidateComponent },
+    { path: 'addstudent', component: AddStudent },
 
 ];
 

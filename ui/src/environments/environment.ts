@@ -11,5 +11,6 @@ export const environment = {
   getCollegeVerify: 'http://localhost:3000/collegeverify',
   getStudent: 'http://localhost:3000/getStudent',
   verifyStudent: 'http://localhost:3000/studentverify',
-  validate: 'http://localhost:3000/validate'
+  validate: 'http://localhost:3000/validate',
+  addStudent: 'http://localhost:3000/createcertificate'
 };
