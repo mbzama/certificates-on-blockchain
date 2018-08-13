@@ -67,6 +67,7 @@ export class AddStudent {
             .subscribe(
                 response => {
                     console.log(response);
+                    this.approved = true;
                 },
                 err => {
                     console.log("Error Ocurred" + err);

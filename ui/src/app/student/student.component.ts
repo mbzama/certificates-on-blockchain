@@ -52,7 +52,7 @@ export class StudentComponent {
                 response => {
                     console.log(response[0]);
                     console.log(response[0].SF);
-                    if (response[0].SF == "0") {
+                    if (response[0].SF == "0" || response[0].SF == "") {
                         this.studentData = response[0];
                         this.studentName = response[0].sname;
                         this.studentBranch = response[0].Sbranch;

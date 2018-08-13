@@ -321,7 +321,7 @@ router.post('/studentverify', async(req, res, next) => {
     
                      var mailoptions = {
                       from:'dummytest471@gmail.com',
-                      to:"imhari213@gmail.com",
+                      to:req.body.email,
                       subject:'Blochain certificate',
                       text:'Hi please check your ccertificate Thank you.....!!!!!!! :)   AND your TRANSACTION ID IS  '+td,
                       attachments: [
