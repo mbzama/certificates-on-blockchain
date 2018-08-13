@@ -165,7 +165,7 @@ router.post('/collegeverify', async(req, res, next) => {
 
    
 
-   fs.readFile(__dirname + './../certificatedocs/'+req.body.email +'document.pdf', async(err, buf) => {
+   fs.readFile(__dirname + './certificatedocs/'+req.body.email +'document.pdf', async(err, buf) => {
       
     if(err){
         console.log(err)
@@ -209,7 +209,7 @@ router.post('/collegeverify', async(req, res, next) => {
                   attachments: [
                       {   
                          
-                          'path': __dirname +"./../certificatedocs/"+req.body.email+"document.pdf" // stream this file
+                          'path': "./certificatedocs/"+req.body.email+"document.pdf" // stream this file
                       },
                   ]
           
@@ -277,7 +277,7 @@ router.post('/studentverify', async(req, res, next) => {
 
    
 
-      fs.readFile(__dirname + './../certificatedocs/'+req.body.email +'document.pdf', async(err, buf) => {
+      fs.readFile( './certificatedocs/'+req.body.email +'document.pdf', async(err, buf) => {
       
           if(err){
               console.log(err)
@@ -327,7 +327,7 @@ router.post('/studentverify', async(req, res, next) => {
                       attachments: [
                           {   
                              
-                              'path': __dirname +"./../certificatedocs/"+req.body.email+"document.pdf" // stream this file
+                              'path': "./certificatedocs/"+req.body.email+"document.pdf" // stream this file
                           },
                       ]
               
@@ -383,7 +383,7 @@ router.post('/validate',upload.single('file-to-upload'), async(req, res, next) =
   
   var trid = req.body.transaction_id;
 
-  fs.readFile(__dirname + './../verificationdocs/'+name_file, async(err, buf) => {
+  fs.readFile('./verificationdocs/'+name_file, async(err, buf) => {
     if(err){
         console.log(err)
     }        
