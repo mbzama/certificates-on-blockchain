@@ -15,6 +15,8 @@ export class ValidateComponent {
 
     doc;
     flag = false;
+    link;
+    fla = false;
 
     //Create Form Group
     form = new FormGroup({
@@ -38,17 +40,21 @@ export class ValidateComponent {
             formData.append('file-to-upload', inputEl.files.item(0));
 
             console.log(formData);
-
+            
             this.httpClient.post(environment.validate, formData)
                 .subscribe(
                     (response) => {
                         console.log(response);
+                        this.fla = false;
+                        this.link = 'https://rinkeby.etherscan.io/tx/'+response[0].id;
                         if (response[0].status === '1') {
-                            this.doc = 'Your Document is Valid :)'
+                            this.fla = true;
+                            this.doc = 'Your Document is Valid  For more Details '  
                         } else {
-                            this.doc = 'Your Document is not Valid :('
+                            this.doc = 'Your Document is not Valid '
                         }
                         this.flag = true;
+                       // this.fla = false;
                     },
                     err => {
                         console.log("Error Ocurred" + err);

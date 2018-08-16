@@ -417,7 +417,7 @@ router.post('/validate',upload.single('file-to-upload'), async(req, res, next) =
       console.log(rsult);
       if(lodash.isEqual(b,z)){
 
-        res.send([{"status" : "1","data":"A valid Document"}]);
+        res.send([{"status" : "1","data":"A valid Document","id":trid}]);
        }else{
               res.send([{"status" : "0","data":"Invalid Document or Transaction ID.....!"}]);
        }
