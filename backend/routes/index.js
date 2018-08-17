@@ -131,7 +131,7 @@ router.post('/createcertificate', async(req, res) => {
   var ID = req.body.collegeID+req.body.email;
   var txID = "0zd322ff";
 
-  await db.query('insert into certificates.Docs values("'+ID+'","'+req.body.email+'","'+req.body.name+'","'+req.body.branch+'","'+req.body.year+'","'+req.body.Degree+'","'+req.body.collegeID+'","'+txID+'","'+filepath+'","1","","");', function(err, result) {
+  await db.query('insert into certificates.Docs values("'+ID+'","'+req.body.email+'","'+req.body.name+'","'+req.body.branch+'","'+req.body.year+'","'+req.body.Degree+'","'+req.body.collegeID+'","'+txID+'","'+filepath+'","0","","");', function(err, result) {
     if (err) throw err;
     else
     console.log(result);
