@@ -504,13 +504,13 @@ router.post('/universityverify', async(req, res, next) => {
 
   for(i = 0;i<n;i++){
 
-    await db.query("update certificates.Docs set uf='"+1+"' where ID ='"+obj[i].ID+"';", function(err, result) {
+    await db.query("update certificates.Docs set UF='"+1+"' where ID ='"+obj[i].ID+"';", function(err, result) {
       if (err){
         res.send(err);
       }
       else
       console.log(result);
-      res.send(result);
+      
     });
 
 
