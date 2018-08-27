@@ -40,13 +40,19 @@
 }
 
 .logo2 {
-    width: 12%;
+    width: 28%;
 }
 
+.col{
+    width: 50%;
+}
 .imageButton {
-    text-align: center;
+    text-align: left;
 }
 
+.ad{
+    width: 400px;
+}
 .studentLoginButton {
     margin-bottom: 30%;
 }
@@ -57,10 +63,10 @@
     border: none;
     outline: none;
     cursor: pointer;
-    padding: 7px 12px;
+    padding: 15px 12px;
     font-size: 15px;
-    width: 25%;
-    margin-left: 3%;
+    width: 57%;
+    margin-left: 13%;
 }
 
 .tablink:hover {
@@ -75,7 +81,7 @@
     cursor: pointer;
     padding: 12px 11px;
     font-size: 17px;
-    margin-left: 3%;
+    margin-left: 9%;
     margin-top: 2%;
 }
 
