@@ -1,10 +1,21 @@
 version: '2'
 
 services:
+ dcob-backend:
+  image: dcob-backend
+  build: ./backend
+  container_name: certificates-backend
+  links:
+      - "mysqldb:mysqldb"
+  depends_on: 
+    - mysqldb
+  ports:
+    - "3000:3000"
+
  mysqldb:
   image: mysql
   build: ./database
-  container_name: mysql
+  container_name: certificates-mysql
   ports:
     - "3306:3306"
   environment:
@@ -12,21 +23,12 @@ services:
     - MYSQL_USER=test
     - MYSQL_PASSWORD=root
     - MYSQL_DATABASE=certificates
-   
- dcob-backend:
-  image: dcob-backend
-  build: ./backend
-  links:
-      - "mysqldb:mysqldb"
-  depends_on: 
-    - mysqldb
-  ports:
-    - "3000:3000"
-   
+
 
  dcob-web-ui:
   image: dcob-web-ui
   build: ./ui
+  container_name: certificates-frontend
   links:
       - "dcob-backend:dcob-backend"
   depends_on:
