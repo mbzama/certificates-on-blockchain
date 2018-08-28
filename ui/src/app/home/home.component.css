@@ -1,9 +1,9 @@
 .container {
-    max-width: 45%;
+    max-width: 65%;
 }
 
 .container2 {
-    max-width: 45%;
+    max-width: 65%;
     margin-top: 3%;
     width: 100%;
     padding-right: 15px;
@@ -24,7 +24,7 @@
 
 .jumbotron {
     padding: 0.18%;
-    background-color: #c40a1b;
+    background-color: #0a90c4;
 }
 
 .jumbotron-fluid {
@@ -45,6 +45,10 @@
 
 .col{
     width: 50%;
+}
+.col1{
+    width: 97%;
+    text-align: right;
 }
 .imageButton {
     text-align: left;
@@ -70,11 +74,11 @@
 }
 
 .tablink:hover {
-    background-color: #c40a1b;
+    background-color: #0a90c4;
 }
 
 .tablink2 {
-    background-color: #58ab36;
+    background-color: #777;
     color: white;
     border: none;
     outline: none;
@@ -86,5 +90,5 @@
 }
 
 .tablink2:hover {
-    background-color: #7bd059;
+    background-color: #ffc800;
 }
