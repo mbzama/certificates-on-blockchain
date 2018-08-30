@@ -23,20 +23,25 @@ var Web3 = require('web3');
 var web3 = new Web3(
   new Web3.providers.HttpProvider('https://rinkeby.infura.io/01430c533dcd4c42bd9cc98cff3eb0a4')
 );
+var tx = require('ethereumjs-tx');
+var lightwallet = require('eth-lightwallet');
+var txutils = lightwallet.txutils;
+var account = "0xabe93970e0f305142629d40e49797b6894d03cba";
+web3.eth.defaultAccount = account;
+var ABI = [ { "constant": false, "inputs": [ { "name": "n", "type": "string" } ], "name": "set", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "get", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" } ]
 var address = '0xaBe93970E0F305142629D40e49797b6894d03CbA';
 var key = 'df83bc5744bf6d7ec9f5dc716c7f2123041b871126109d59a95d90a7a4699ebc';
-var interface = [ { "constant": false, "inputs": [ { "name": "ob", "type": "string" } ], "name": "setdata", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "get", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function" } ];
-var bytecode = '608060405234801561001057600080fd5b506102d7806100206000396000f30060806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680636d4ce63c14610051578063900cf582146100e1575b600080fd5b34801561005d57600080fd5b5061006661014a565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100a657808201518184015260208101905061008b565b50505050905090810190601f1680156100d35780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b3480156100ed57600080fd5b50610148600480360381019080803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843782019150505050505091929192905050506101ec565b005b606060008054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156101e25780601f106101b7576101008083540402835291602001916101e2565b820191906000526020600020905b8154815290600101906020018083116101c557829003601f168201915b5050505050905090565b8060009080519060200190610202929190610206565b5050565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061024757805160ff1916838001178555610275565b82800160010185558215610275579182015b82811115610274578251825591602001919060010190610259565b5b5090506102829190610286565b5090565b6102a891905b808211156102a457600081600090555060010161028c565b5090565b905600a165627a7a7230582049aa3febaf103699a7314fb49849a7b1e42e465b551e4fd4c5b48e2a4d9b1b940029'
+var contract = web3.eth.contract(ABI);
+var contractAddress = '0x03a067144f4a15ddede58f412c60e6ab0c017d42';
+var instance = contract.at('0x03a067144f4a15ddede58f412c60e6ab0c017d42');
 
 
 
-// web3.setProvider(new web3.providers.HttpProvider("http://localhost:8545"));
-// const contractAbi = [ { "constant": true, "inputs": [], "name": "get", "outputs": [ { "name": "", "type": "string" } ], "payable": false, "stateMutability": "view", "type": "function", "signature": "0x6d4ce63c" }, { "constant": false, "inputs": [ { "name": "ob", "type": "string" } ], "name": "setdata", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function", "signature": "0x900cf582" } ]
-// var contract_addr = "0x197beCA5d29A965452D5B66D3353aEFe5991FC5d";
-// var contract_instance = web3.eth.contract(contractAbi).at(contract_addr);
+
+
 //Input Decoder
 const InputDataDecoder = require('ethereum-input-data-decoder');
-const decoder = new InputDataDecoder(interface); 
+const decoder = new InputDataDecoder(ABI); 
 
 //crypto
 var sha256 = require('sha256');
@@ -94,6 +99,18 @@ function sendRaw(rawTx,callback) {
       }
   });
 }
+
+
+//transaction options
+
+var txOptions = {
+  nonce: web3.toHex(web3.eth.getTransactionCount(address)),
+  gasLimit: web3.toHex(800000),
+  gasPrice: web3.toHex(20000000000),
+  to: contractAddress
+}
+
+
 
 
 router.post('/createcertificate', async(req, res) => {
@@ -177,12 +194,16 @@ router.post('/collegeverify', async(req, res, next) => {
         //  await web3.personal.unlockAccount(web3.eth.accounts[0],'hari');
           var d = await sha256(buf);
           
-           var rawTx = {
-                nonce: web3.toHex(web3.eth.getTransactionCount(address)),
-                gasLimit: web3.toHex(800000),
-                gasPrice: web3.toHex(20000000000),
-                data: d
-                         };
+          //  var rawTx = {
+          //       nonce: web3.toHex(web3.eth.getTransactionCount(address)),
+          //       gasLimit: web3.toHex(800000),
+          //       gasPrice: web3.toHex(20000000000),
+          //       data: d
+          //                };
+
+          var rawTx = txutils.functionTx(ABI, 'set', [d], txOptions);
+         
+
           var txhash = await sendRaw(rawTx,async(result)=>{
             console.log(result+"*******************************");
         
@@ -296,16 +317,25 @@ router.post('/studentverify', async(req, res, next) => {
               var d = sha256(buf);
 
 
-              var rawTx = {
-                nonce: web3.toHex(web3.eth.getTransactionCount(address)),
-                gasLimit: web3.toHex(800000),
-                gasPrice: web3.toHex(20000000000),
-                data: d
-                         };
-              var txhash = await sendRaw(rawTx,async(result)=>{
-              console.log(result+"*******************************");
+              // var rawTx = {
+              //   nonce: web3.toHex(web3.eth.getTransactionCount(address)),
+              //   gasLimit: web3.toHex(800000),
+              //   gasPrice: web3.toHex(20000000000),
+              //   data: d
+              //            };
+              // var txhash = await sendRaw(rawTx,async(result)=>{
+              // console.log(result+"*******************************");
         
-              var td = result;
+              // var td = result;
+
+              console.log(d);
+              var rawTx = txutils.functionTx(ABI, 'set', [d], txOptions);
+         
+
+              var txhash = await sendRaw(rawTx,async(result)=>{
+                console.log(result+"*******************************");
+            
+                  var td = result;
 
 
 
@@ -415,7 +445,8 @@ router.post('/validate',upload.single('file-to-upload'), async(req, res, next) =
       console.log(b);
       console.log(d.input);
       console.log(rsult);
-      if(lodash.isEqual(b,z)){
+      console.log(check_value);
+      if(lodash.isEqual(b,check_value)){
 
         res.send([{"status" : "1","data":"A valid Document","id":trid}]);
        }else{
